@@ -148,18 +148,6 @@ public class Penjadwalan {
         printJadwal(jadwal);
     }
 
-    private static List<Jadwal> geneticAlgorithm() {
-        return generateSchedule();
-    }
-
-    private static List<Jadwal> simulatedAnnealing() {
-        return generateSchedule();
-    }
-
-    private static List<Jadwal> tabuSearch() {
-        return generateSchedule();
-    }
-
     private static List<Jadwal> generateSchedule() {
         List<Jadwal> bestSchedule = new ArrayList<>();
         HashSet<String> used = new HashSet<>();
@@ -189,6 +177,133 @@ public class Penjadwalan {
 
         return bestSchedule;
     }
+    private static List<Jadwal> geneticAlgorithm() {
+        List<List<Jadwal>> population = generateInitialPopulation();
+        int generations = 100;
+        for (int i = 0; i < generations; i++) {
+            population = evolvePopulation(population); // List<List<Jadwal>>
+        }
+        return selectBestSchedule(population); // Returns List<Jadwal>
+    }
+    private static List<List<Jadwal>> generateInitialPopulation() {
+        List<List<Jadwal>> initialPopulation = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            initialPopulation.add(generateSchedule()); // Generate a schedule
+        }
+        return initialPopulation;
+    }
+    private static List<List<Jadwal>> evolvePopulation(List<List<Jadwal>> population) {
+        List<List<Jadwal>> newPopulation = new ArrayList<>();
+        for (int i = 0; i < population.size(); i += 2) {
+            List<Jadwal> parent1 = population.get(i);
+            List<Jadwal> parent2;
+
+            if (i + 1 < population.size()) {
+                parent2 = population.get(i + 1); // Normal pairing
+            } else {
+                parent2 = parent1; // If no pair, use parent1 as parent2
+            }
+
+            List<Jadwal> offspring = crossover(parent1, parent2);  // Perform crossover
+            mutate(offspring); // Perform mutation
+            newPopulation.add(offspring);
+        }
+        return newPopulation;
+    }
+
+    private static List<Jadwal> crossover(List<Jadwal> parent1, List<Jadwal> parent2) {
+        // Combine parts of parent1 and parent2 to create offspring
+        // This is a simplistic crossover operation
+        List<Jadwal> offspring = new ArrayList<>(parent1.subList(0, parent1.size() / 2));
+        offspring.addAll(parent2.subList(parent2.size() / 2, parent2.size()));
+        return offspring;
+    }
+
+    private static void mutate(List<Jadwal> schedule) {
+        if (schedule.isEmpty()) return; // Pastikan daftar tidak kosong
+        Random random = new Random();
+        int index = random.nextInt(schedule.size());
+        schedule.get(index).jam = jams[random.nextInt(jams.length)];
+    }
+
+    private static List<Jadwal> selectBestSchedule(List<List<Jadwal>> population) {
+        // For simplicity, select the first schedule as the best
+        return population.get(0);  // Return the best schedule, which is a List<Jadwal>
+    }
+    private static List<Jadwal> simulatedAnnealing() {
+        List<Jadwal> currentSchedule = generateSchedule();
+        List<Jadwal> bestSchedule = new ArrayList<>(currentSchedule);
+        double temperature = 1000;
+        double coolingRate = 0.003;
+
+        while (temperature > 1) {
+            List<Jadwal> newSchedule = new ArrayList<>(currentSchedule);
+            Random random = new Random();
+            int index = random.nextInt(newSchedule.size());
+            newSchedule.get(index).jam = jams[random.nextInt(jams.length)];
+
+            if (acceptanceProbability(currentSchedule, newSchedule, temperature) > Math.random()) {
+                currentSchedule = newSchedule;
+            }
+
+            if (calculateFitness(newSchedule) > calculateFitness(bestSchedule)) {
+                bestSchedule = newSchedule;
+            }
+
+            temperature *= 1 - coolingRate;
+        }
+
+        return bestSchedule;
+    }
+
+    private static double acceptanceProbability(List<Jadwal> current, List<Jadwal> newSchedule, double temperature) {
+        int currentFitness = calculateFitness(current);
+        int newFitness = calculateFitness(newSchedule);
+        if (newFitness > currentFitness) {
+            return 1.0;
+        }
+        return Math.exp((newFitness - currentFitness) / temperature);
+    }
+
+    private static int calculateFitness(List<Jadwal> schedule) {
+        // Simplified fitness function: higher is better
+        return schedule.size(); // Here we just return size for simplicity
+    }
+    private static List<Jadwal> tabuSearch() {
+        List<Jadwal> currentSchedule = generateSchedule();
+        List<Jadwal> bestSchedule = new ArrayList<>(currentSchedule);
+        List<List<Jadwal>> tabuList = new ArrayList<>();
+        int maxTabuSize = 10;
+        int maxIterations = 100;
+
+        for (int i = 0; i < maxIterations; i++) {
+            List<Jadwal> neighbor = generateNeighbor(currentSchedule);
+
+            if (!tabuList.contains(neighbor) && calculateFitness(neighbor) > calculateFitness(bestSchedule)) {
+                currentSchedule = neighbor;
+                if (calculateFitness(currentSchedule) > calculateFitness(bestSchedule)) {
+                    bestSchedule = currentSchedule;
+                }
+            }
+
+            tabuList.add(new ArrayList<>(currentSchedule));
+            if (tabuList.size() > maxTabuSize) {
+                tabuList.remove(0); // Keep tabu list size limited
+            }
+        }
+
+        return bestSchedule;
+    }
+
+    private static List<Jadwal> generateNeighbor(List<Jadwal> schedule) {
+        // Generate a neighboring solution by making a slight change
+        Random random = new Random();
+        List<Jadwal> neighbor = new ArrayList<>(schedule);
+        int index = random.nextInt(neighbor.size());
+        neighbor.get(index).jam = jams[random.nextInt(jams.length)];
+        return neighbor;
+    }
+
 
     private static void printJadwal(List<Jadwal> jadwal) {
         String[] daysOrder = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
