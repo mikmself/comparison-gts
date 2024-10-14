@@ -9,9 +9,13 @@ public class MataKuliahSelector {
         Scanner scanner = new Scanner(System.in);
         int totalSKS = 0;
 
+        // Tampilkan daftar mata kuliah dalam bentuk tabel
         System.out.println("Daftar Mata Kuliah:");
+        System.out.printf("%-10s%-30s%-10s%n", "Kode", "Mata Kuliah", "SKS");
+        System.out.println("----------------------------------------------------");
+
         for (MataKuliah matkul : DataInitializer.matkuls) {
-            System.out.println(matkul.kode + " - " + matkul.nama + " | SKS: " + matkul.sks);
+            System.out.printf("%-10s%-30s%-10d%n", matkul.kode, matkul.nama, matkul.sks);
         }
 
         while (totalSKS < 24) {
