@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class JadwalPrinter {
+
     public static void generateAndPrintSchedule(String algorithmName, ScheduleGenerator.ScheduleGeneratorFunction generator) {
         long startTime = System.nanoTime();
         List<Jadwal> jadwal = generator.generate();
@@ -13,11 +14,47 @@ public class JadwalPrinter {
     }
 
     private static void printJadwal(List<Jadwal> jadwal) {
-        System.out.printf("%-20s%-10s%-10s%-15s%-15s%n", "Mata Kuliah", "Jam", "Hari", "Dosen", "Ruang");
-        System.out.println("-------------------------------------------------------------");
+        String[] daysOrder = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
+        String[] timeOrder = {"08:00", "10:00", "12:00", "14:00", "16:00"};
 
-        for (Jadwal j : jadwal) {
-            System.out.printf("%-20s%-10s%-10s%-15s%-15s%n", j.matkul, j.jam, j.hari, j.dosen, j.ruang);
+        // Sort the schedule based on days and then by time
+        jadwal.sort((j1, j2) -> {
+            int dayIndex1 = findIndex(daysOrder, j1.hari);
+            int dayIndex2 = findIndex(daysOrder, j2.hari);
+
+            // If the days are the same, sort by time
+            if (dayIndex1 == dayIndex2) {
+                int timeIndex1 = findIndex(timeOrder, j1.jam);
+                int timeIndex2 = findIndex(timeOrder, j2.jam);
+                return Integer.compare(timeIndex1, timeIndex2);
+            }
+            return Integer.compare(dayIndex1, dayIndex2);
+        });
+
+        // Print the schedule grouped by day and sorted by time
+        for (String day : daysOrder) {
+            boolean dayPrinted = false;  // Track if we already printed the day header
+            for (Jadwal j : jadwal) {
+                if (j.hari.equalsIgnoreCase(day)) {
+                    if (!dayPrinted) {
+                        System.out.println("--------------------------------------------------------------");
+                        System.out.println(day);
+                        System.out.println("--------------------------------------------------------------");
+                        dayPrinted = true;  // Ensure the day is printed only once
+                    }
+                    System.out.printf("         | %-20s | %-10s | %-15s | %-15s%n", j.matkul, j.jam, j.dosen, j.ruang);
+                    System.out.println("         |--------------------------------------------------------");
+                }
+            }
         }
+    }
+
+    private static int findIndex(String[] array, String value) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equalsIgnoreCase(value)) {
+                return i;
+            }
+        }
+        return -1;  // Not found
     }
 }
