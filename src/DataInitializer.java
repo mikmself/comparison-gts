@@ -22,8 +22,10 @@ public class DataInitializer {
         String[] emails = {"andi@mail.com", "budi@mail.com", "citra@mail.com", "dewi@mail.com", "eko@mail.com"};
 
         for (int i = 0; i < dosenNames.length; i++) {
-            dosens.add(new Dosen(dosenNames[i], "NIP" + (1000 + i), jabatan[i % jabatan.length], fakultas[i % fakultas.length], emails[i]));
+            String email = emails[i % emails.length];  // Menyesuaikan jumlah email
+            dosens.add(new Dosen(dosenNames[i], "NIP" + (1000 + i), jabatan[i % jabatan.length], fakultas[i % fakultas.length], email));
         }
+
 
         String[] jenisRuang = {"kelas", "lab", "auditorium"};
         for (int i = 1; i <= 10; i++) {
@@ -48,8 +50,11 @@ public class DataInitializer {
         int[] sksArray = {
                 3, 3, 1, 2, 4, 3, 2, 2, 3, 3, 3, 2, 3, 3, 3, 3, 2, 4, 3, 3, 2, 3, 3, 3, 2, 3, 3, 3, 2, 4
         };
-
         for (int i = 0; i < matkulNames.length; i++) {
+            if (i >= matkulNames.length || i >= matkulCodes.length || i >= sksArray.length) {
+                System.out.println("Array length mismatch at index: " + i);
+                break; // Exit if lengths do not match
+            }
             int sks = sksArray[i];
             String jenis = (sks == 2) ? "teori" : "teori & praktek";
             String semester = "Semester " + (1 + (i % 8));

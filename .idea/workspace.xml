@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef22198a-8cb9-4447-968e-7ef0716b6973" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PenjadwalanMatkul.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PenjadwalanMatkul.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dosen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dosen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Jadwal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jadwal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JadwalPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JadwalPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MataKuliah.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MataKuliah.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MataKuliahSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MataKuliahSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Penjadwalan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Penjadwalan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ruang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ruang.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScheduleGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScheduleGenerator.java" afterDir="false" />
-    </list>
+    <list default="true" id="ef22198a-8cb9-4447-968e-7ef0716b6973" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,7 +50,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -111,10 +96,26 @@
       <workItem from="1731330442202" duration="4000" />
       <workItem from="1733315269429" duration="67000" />
       <workItem from="1733381230994" duration="474000" />
+      <workItem from="1733381709034" duration="2478000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
