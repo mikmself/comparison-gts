@@ -30,17 +30,15 @@ public class JadwalPrinter {
             }
             return Integer.compare(dayIndex1, dayIndex2);
         });
-
-        // Print the schedule grouped by day and sorted by time
         for (String day : daysOrder) {
-            boolean dayPrinted = false;  // Track if we already printed the day header
+            boolean dayPrinted = false;
             for (Jadwal j : jadwal) {
                 if (j.hari.equalsIgnoreCase(day)) {
                     if (!dayPrinted) {
                         System.out.println("--------------------------------------------------------------");
                         System.out.println(day);
                         System.out.println("--------------------------------------------------------------");
-                        dayPrinted = true;  // Ensure the day is printed only once
+                        dayPrinted = true;
                     }
                     System.out.printf("         | %-20s | %-10s | %-15s | %-15s%n", j.matkul, j.jam, j.dosen, j.ruang);
                     System.out.println("         |--------------------------------------------------------");

@@ -6,7 +6,6 @@ public class DataInitializer {
     static List<Dosen> dosens = new ArrayList<>();
     static List<Ruang> ruangs = new ArrayList<>();
     static List<MataKuliah> matkuls = new ArrayList<>();
-
     public static void createDummyData() {
         String[] dosenNames = {
                 "Abdul Azis M.Kom.", "Abdul Jahir M.Kom.", "Adam Prayogo Kuncoro M.Kom.", "Ade Nurhopipah S.Si., M.Cs.",
@@ -20,13 +19,10 @@ public class DataInitializer {
         String[] jabatan = {"Lektor", "Lektor Kepala", "Asisten Ahli", "Guru Besar", "Dosen"};
         String[] fakultas = {"Fakultas Ilmu Komputer", "Fakultas Teknik", "Fakultas Ekonomi", "Fakultas Seni", "Fakultas Hukum"};
         String[] emails = {"andi@mail.com", "budi@mail.com", "citra@mail.com", "dewi@mail.com", "eko@mail.com"};
-
         for (int i = 0; i < dosenNames.length; i++) {
-            String email = emails[i % emails.length];  // Menyesuaikan jumlah email
+            String email = emails[i % emails.length];
             dosens.add(new Dosen(dosenNames[i], "NIP" + (1000 + i), jabatan[i % jabatan.length], fakultas[i % fakultas.length], email));
         }
-
-
         String[] jenisRuang = {"kelas", "lab", "auditorium"};
         for (int i = 1; i <= 10; i++) {
             ruangs.add(new Ruang("Ruang " + i, jenisRuang[i % jenisRuang.length], 30 + new Random().nextInt(20), true, false));
@@ -53,7 +49,7 @@ public class DataInitializer {
         for (int i = 0; i < matkulNames.length; i++) {
             if (i >= matkulNames.length || i >= matkulCodes.length || i >= sksArray.length) {
                 System.out.println("Array length mismatch at index: " + i);
-                break; // Exit if lengths do not match
+                break;
             }
             int sks = sksArray[i];
             String jenis = (sks == 2) ? "teori" : "teori & praktek";
