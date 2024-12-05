@@ -8,7 +8,15 @@ public class DataInitializer {
     static List<MataKuliah> matkuls = new ArrayList<>();
 
     public static void createDummyData() {
-        String[] dosenNames = {"Dr. Andi", "Dr. Budi", "Dr. Citra", "Dr. Dewi", "Dr. Eko"};
+        String[] dosenNames = {
+                "Abdul Azis M.Kom.", "Abdul Jahir M.Kom.", "Adam Prayogo Kuncoro M.Kom.", "Ade Nurhopipah S.Si., M.Cs.",
+                "Dr. Ade Tuti Turistiati MIRHRM.", "Adinna Islah Perwita , M. I. Kom.", "Adita Miranti M.I.Kom.",
+                "Aditya Riza Dharmawan S.H., M.H", "Agung Prasetyo M.Kom.", "Agus Pramono M.T.", "Akto Hariawan S.Kom., M.Si.",
+                "Dr. Alex Nanang Agus Sifa S.Fil.I., M.Pd.", "Alfian Muhazir S.Sos., M.A.", "Ali Nur Ikhsan M.Kom.",
+                "Ambar Winarni", "Andi Dwi Riyanto M.Kom.", "Andik Wijanarko M.T.", "Anisa Nur Andina S.E., M.Si.",
+                "Antonius Ary Setyawan", "Anugerah Bagus Wijaya M.Kom.", "Argiyan Dwi Pritama S.Kom., M.MSI.",
+                "Dr. Arief Adhy Kurniawan S.E., M.Si.", "Asep Suryanto S.Kom.", "Aulia Hamdi M.Kom."
+        };
         String[] jabatan = {"Lektor", "Lektor Kepala", "Asisten Ahli", "Guru Besar", "Dosen"};
         String[] fakultas = {"Fakultas Ilmu Komputer", "Fakultas Teknik", "Fakultas Ekonomi", "Fakultas Seni", "Fakultas Hukum"};
         String[] emails = {"andi@mail.com", "budi@mail.com", "citra@mail.com", "dewi@mail.com", "eko@mail.com"};
