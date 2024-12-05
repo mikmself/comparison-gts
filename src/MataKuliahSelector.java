@@ -9,10 +9,10 @@ public class MataKuliahSelector {
         Scanner scanner = new Scanner(System.in);
         int totalSKS = 0;
         System.out.println("Daftar Mata Kuliah:");
-        System.out.printf("%-10s%-30s%-10s%n", "Kode", "Mata Kuliah", "SKS");
-        System.out.println("----------------------------------------------------");
+        System.out.printf("%-10s%-50s%-10s%n", "Kode", "Mata Kuliah", "SKS");
+        System.out.println("---------------------------------------------------------------");
         for (MataKuliah matkul : DataInitializer.matkuls) {
-            System.out.printf("%-10s%-30s%-10d%n", matkul.kode, matkul.nama, matkul.sks);
+            System.out.printf("%-10s%-52s%-10d%n", matkul.kode, matkul.nama, matkul.sks);
         }
         while (totalSKS < 24) {
             System.out.print("Masukkan kode mata kuliah yang ingin dipilih (atau 'selesai' untuk mengakhiri): ");
