@@ -4,110 +4,122 @@ import java.util.List;
 import java.util.Random;
 
 public class ScheduleGenerator {
-    static String[] hari = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
-    static String[] jams = {"08:00", "10:00", "12:00", "14:00", "16:00"};
-    public static List<Jadwal> generateSchedule() {
-        List<Jadwal> bestSchedule = new ArrayList<>();
+    static String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    static String[] times = {"08:00", "10:00", "12:00", "14:00", "16:00"};
+
+    public static List<Schedule> generateSchedule() {
+        List<Schedule> bestSchedule = new ArrayList<>();
         HashSet<String> used = new HashSet<>();
         Random random = new Random();
-        for (MataKuliah matkul : MataKuliahSelector.selectedMatkul) {
-            String day = hari[random.nextInt(hari.length)];
-            String jam = jams[random.nextInt(jams.length)];
-            Dosen dosen = DataInitializer.dosens.get(random.nextInt(DataInitializer.dosens.size()));
-            Ruang ruang = DataInitializer.ruangs.get(random.nextInt(DataInitializer.ruangs.size()));
-            String uniqueKey = day + jam;
+
+        for (Course course : CourseSelector.selectedCourses) {
+            String day = days[random.nextInt(days.length)];
+            String time = times[random.nextInt(times.length)];
+            Lecturer lecturer = DataInitializer.lecturers.get(random.nextInt(DataInitializer.lecturers.size()));
+            Room room = DataInitializer.rooms.get(random.nextInt(DataInitializer.rooms.size()));
+            String uniqueKey = day + time;
 
             while (used.contains(uniqueKey)) {
-                jam = jams[random.nextInt(jams.length)];
-                uniqueKey = day + jam;
+                time = times[random.nextInt(times.length)];
+                uniqueKey = day + time;
             }
             used.add(uniqueKey);
-            bestSchedule.add(new Jadwal(matkul.nama, jam, day, dosen.nama, ruang.nama));
+            bestSchedule.add(new Schedule(course.name, time, day, lecturer.name, room.name));
         }
 
         return bestSchedule;
     }
-    public static List<Jadwal> geneticAlgorithm() {
-        List<List<Jadwal>> population = generateInitialPopulation();
+
+    public static List<Schedule> geneticAlgorithm() {
+        List<List<Schedule>> population = generateInitialPopulation();
         int generations = 100;
         for (int i = 0; i < generations; i++) {
             population = evolvePopulation(population);
         }
         return selectBestSchedule(population);
     }
-    private static List<List<Jadwal>> generateInitialPopulation() {
-        List<List<Jadwal>> initialPopulation = new ArrayList<>();
+
+    private static List<List<Schedule>> generateInitialPopulation() {
+        List<List<Schedule>> initialPopulation = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             initialPopulation.add(generateSchedule());
         }
         return initialPopulation;
     }
-    private static List<List<Jadwal>> evolvePopulation(List<List<Jadwal>> population) {
-        List<List<Jadwal>> newPopulation = new ArrayList<>();
-        for (int i = 0; i < population.size(); i += 2) {
-            List<Jadwal> parent1 = population.get(i);
-            List<Jadwal> parent2 = (i + 1 < population.size()) ? population.get(i + 1) : parent1;
 
-            List<Jadwal> offspring = crossover(parent1, parent2);
+    private static List<List<Schedule>> evolvePopulation(List<List<Schedule>> population) {
+        List<List<Schedule>> newPopulation = new ArrayList<>();
+        for (int i = 0; i < population.size(); i += 2) {
+            List<Schedule> parent1 = population.get(i);
+            List<Schedule> parent2 = (i + 1 < population.size()) ? population.get(i + 1) : parent1;
+
+            List<Schedule> offspring = crossover(parent1, parent2);
             mutate(offspring);
             newPopulation.add(offspring);
         }
         return newPopulation;
     }
-    private static List<Jadwal> crossover(List<Jadwal> parent1, List<Jadwal> parent2) {
-        List<Jadwal> offspring = new ArrayList<>(parent1.subList(0, parent1.size() / 2));
-        for (Jadwal jadwal : parent2.subList(parent2.size() / 2, parent2.size())) {
-            if (!isTimeConflict(offspring, jadwal.hari, jadwal.jam)) {
-                offspring.add(jadwal);
+
+    private static List<Schedule> crossover(List<Schedule> parent1, List<Schedule> parent2) {
+        List<Schedule> offspring = new ArrayList<>(parent1.subList(0, parent1.size() / 2));
+        for (Schedule schedule : parent2.subList(parent2.size() / 2, parent2.size())) {
+            if (!isTimeConflict(offspring, schedule.day, schedule.time)) {
+                offspring.add(schedule);
             } else {
-                String newJam;
+                String newTime;
                 Random random = new Random();
                 do {
-                    newJam = jams[random.nextInt(jams.length)];
-                } while (isTimeConflict(offspring, jadwal.hari, newJam));
-                offspring.add(new Jadwal(jadwal.matkul, newJam, jadwal.hari, jadwal.dosen, jadwal.ruang));
+                    newTime = times[random.nextInt(times.length)];
+                } while (isTimeConflict(offspring, schedule.day, newTime));
+                offspring.add(new Schedule(schedule.subject, newTime, schedule.day, schedule.lecturer, schedule.room));
             }
         }
         return offspring;
     }
-    private static void mutate(List<Jadwal> schedule) {
+
+    private static void mutate(List<Schedule> schedule) {
         if (schedule.isEmpty()) return;
         Random random = new Random();
         int index = random.nextInt(schedule.size());
-        Jadwal selectedJadwal = schedule.get(index);
-        String newJam;
+        Schedule selectedSchedule = schedule.get(index);
+        String newTime;
         do {
-            newJam = jams[random.nextInt(jams.length)];
-        } while (isTimeConflict(schedule, selectedJadwal.hari, newJam, index));
+            newTime = times[random.nextInt(times.length)];
+        } while (isTimeConflict(schedule, selectedSchedule.day, newTime, index));
 
-        schedule.get(index).jam = newJam;
+        schedule.get(index).time = newTime;
     }
-    private static boolean isTimeConflict(List<Jadwal> schedule, String hari, String jam) {
-        for (Jadwal jadwal : schedule) {
-            if (jadwal.hari.equals(hari) && jadwal.jam.equals(jam)) {
+
+    private static boolean isTimeConflict(List<Schedule> schedule, String day, String time) {
+        for (Schedule scheduleItem : schedule) {
+            if (scheduleItem.day.equals(day) && scheduleItem.time.equals(time)) {
                 return true;
             }
         }
         return false;
     }
-    private static List<Jadwal> selectBestSchedule(List<List<Jadwal>> population) {
+
+    private static List<Schedule> selectBestSchedule(List<List<Schedule>> population) {
         return population.get(0);
     }
-    public static List<Jadwal> simulatedAnnealing() {
-        List<Jadwal> currentSchedule = generateSchedule();
-        List<Jadwal> bestSchedule = new ArrayList<>(currentSchedule);
+
+    public static List<Schedule> simulatedAnnealing() {
+        List<Schedule> currentSchedule = generateSchedule();
+        List<Schedule> bestSchedule = new ArrayList<>(currentSchedule);
         double temperature = 1000;
         double coolingRate = 0.003;
         Random random = new Random();
+
         while (temperature > 1) {
-            List<Jadwal> newSchedule = new ArrayList<>(currentSchedule);
+            List<Schedule> newSchedule = new ArrayList<>(currentSchedule);
             int index = random.nextInt(newSchedule.size());
-            Jadwal selectedJadwal = newSchedule.get(index);
-            String newJam;
+            Schedule selectedSchedule = newSchedule.get(index);
+            String newTime;
             do {
-                newJam = jams[random.nextInt(jams.length)];
-            } while (isTimeConflict(newSchedule, selectedJadwal.hari, newJam, index));
-            newSchedule.get(index).jam = newJam;
+                newTime = times[random.nextInt(times.length)];
+            } while (isTimeConflict(newSchedule, selectedSchedule.day, newTime, index));
+
+            newSchedule.get(index).time = newTime;
             if (acceptanceProbability(currentSchedule, newSchedule, temperature) > Math.random()) {
                 currentSchedule = newSchedule;
             }
@@ -118,7 +130,8 @@ public class ScheduleGenerator {
         }
         return bestSchedule;
     }
-    private static double acceptanceProbability(List<Jadwal> current, List<Jadwal> newSchedule, double temperature) {
+
+    private static double acceptanceProbability(List<Schedule> current, List<Schedule> newSchedule, double temperature) {
         int currentFitness = calculateFitness(current);
         int newFitness = calculateFitness(newSchedule);
         if (newFitness > currentFitness) {
@@ -126,24 +139,27 @@ public class ScheduleGenerator {
         }
         return Math.exp((newFitness - currentFitness) / temperature);
     }
-    private static boolean isTimeConflict(List<Jadwal> schedule, String hari, String jam, int excludeIndex) {
+
+    private static boolean isTimeConflict(List<Schedule> schedule, String day, String time, int excludeIndex) {
         for (int i = 0; i < schedule.size(); i++) {
             if (i == excludeIndex) continue;
-            Jadwal jadwal = schedule.get(i);
-            if (jadwal.hari.equals(hari) && jadwal.jam.equals(jam)) {
+            Schedule scheduleItem = schedule.get(i);
+            if (scheduleItem.day.equals(day) && scheduleItem.time.equals(time)) {
                 return true;
             }
         }
         return false;
     }
-    public static List<Jadwal> tabuSearch() {
-        List<Jadwal> currentSchedule = generateSchedule();
-        List<Jadwal> bestSchedule = new ArrayList<>(currentSchedule);
-        List<List<Jadwal>> tabuList = new ArrayList<>();
+
+    public static List<Schedule> tabuSearch() {
+        List<Schedule> currentSchedule = generateSchedule();
+        List<Schedule> bestSchedule = new ArrayList<>(currentSchedule);
+        List<List<Schedule>> tabuList = new ArrayList<>();
         int maxTabuSize = 10;
         int maxIterations = 100;
+
         for (int i = 0; i < maxIterations; i++) {
-            List<Jadwal> neighbor = generateNeighbor(currentSchedule);
+            List<Schedule> neighbor = generateNeighbor(currentSchedule);
             if (!tabuList.contains(neighbor) && calculateFitness(neighbor) > calculateFitness(bestSchedule)) {
                 currentSchedule = neighbor;
                 if (calculateFitness(currentSchedule) > calculateFitness(bestSchedule)) {
@@ -157,23 +173,26 @@ public class ScheduleGenerator {
         }
         return bestSchedule;
     }
-    private static List<Jadwal> generateNeighbor(List<Jadwal> schedule) {
+
+    private static List<Schedule> generateNeighbor(List<Schedule> schedule) {
         Random random = new Random();
-        List<Jadwal> neighbor = new ArrayList<>(schedule);
+        List<Schedule> neighbor = new ArrayList<>(schedule);
         int index = random.nextInt(neighbor.size());
-        Jadwal selectedJadwal = neighbor.get(index);
-        String newJam;
+        Schedule selectedSchedule = neighbor.get(index);
+        String newTime;
         do {
-            newJam = jams[random.nextInt(jams.length)];
-        } while (isTimeConflict(neighbor, selectedJadwal.hari, newJam, index));
-        neighbor.get(index).jam = newJam;
+            newTime = times[random.nextInt(times.length)];
+        } while (isTimeConflict(neighbor, selectedSchedule.day, newTime, index));
+        neighbor.get(index).time = newTime;
         return neighbor;
     }
-    private static int calculateFitness(List<Jadwal> schedule) {
+
+    private static int calculateFitness(List<Schedule> schedule) {
         return schedule.size();
     }
+
     @FunctionalInterface
     public interface ScheduleGeneratorFunction {
-        List<Jadwal> generate();
+        List<Schedule> generate();
     }
 }
