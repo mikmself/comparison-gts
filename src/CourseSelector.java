@@ -2,9 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The `CourseSelector` class allows users to select courses and manage their selection.
+ */
 public class CourseSelector {
     static List<Course> selectedCourses = new ArrayList<>();
 
+    /**
+     * Prompts the user to select courses until the total credits reach 24.
+     */
     public static void selectCourses() {
         Scanner scanner = new Scanner(System.in);
         int totalCredits = 0;
@@ -41,6 +47,12 @@ public class CourseSelector {
         }
     }
 
+    /**
+     * Finds a course by its code.
+     *
+     * @param code The course code.
+     * @return The course if found, otherwise null.
+     */
     private static Course findCourse(String code) {
         for (Course course : DataInitializer.courses) {
             if (course.code.equalsIgnoreCase(code)) {
@@ -50,6 +62,9 @@ public class CourseSelector {
         return null;
     }
 
+    /**
+     * Prints the list of selected courses.
+     */
     private static void printSelectedCourses() {
         System.out.println("\nSelected Courses:");
         for (Course course : selectedCourses) {
@@ -57,6 +72,12 @@ public class CourseSelector {
         }
     }
 
+    /**
+     * Handles the option to remove a selected course.
+     *
+     * @param scanner The scanner to read user input.
+     * @param totalCredits The total credits of selected courses.
+     */
     private static void handleRemoveOption(Scanner scanner, int totalCredits) {
         System.out.print("Do you want to remove a course? (y/n): ");
         String removeInput = scanner.nextLine();
@@ -74,6 +95,12 @@ public class CourseSelector {
         }
     }
 
+    /**
+     * Finds a course in the selected courses by its code.
+     *
+     * @param code The course code.
+     * @return The course if found, otherwise null.
+     */
     private static Course findCourseInSelected(String code) {
         for (Course course : selectedCourses) {
             if (course.code.equalsIgnoreCase(code)) {
@@ -83,6 +110,13 @@ public class CourseSelector {
         return null;
     }
 
+    /**
+     * Asks the user if they want to generate the schedule.
+     *
+     * @param scanner The scanner to read user input.
+     * @param totalCredits The total credits of selected courses.
+     * @return True if the user wants to generate the schedule, otherwise false.
+     */
     private static boolean askToGenerateSchedule(Scanner scanner, int totalCredits) {
         System.out.print("Total credits exceed 20, do you want to generate the schedule now? (y/n): ");
         String generateInput = scanner.nextLine();
