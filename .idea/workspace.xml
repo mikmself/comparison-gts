@@ -42,7 +42,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Penjadwalan.executor": "Run",
-    "Application.Scheduling.executor": "Debug",
+    "Application.Scheduling.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -114,7 +114,7 @@
       <workItem from="1733417304345" duration="893000" />
       <workItem from="1733461942118" duration="1325000" />
       <workItem from="1733474323438" duration="196000" />
-      <workItem from="1733474525892" duration="3045000" />
+      <workItem from="1733474525892" duration="3457000" />
     </task>
     <servers />
   </component>
