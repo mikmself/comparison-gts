@@ -1,6 +1,12 @@
 import java.util.List;
 
+/**
+ * Kelas `SchedulePrinter` menyediakan metode untuk mencetak jadwal dan waktu eksekusi dari berbagai algoritma.
+ */
 public class SchedulePrinter {
+    /**
+     * Mencetak tabel waktu eksekusi dari algoritma Genetic Algorithm, Simulated Annealing, dan Tabu Search.
+     */
     public static void printTableOfExecutionTimes() {
         System.out.println("Execution Times:");
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
@@ -26,6 +32,13 @@ public class SchedulePrinter {
         }
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
     }
+
+    /**
+     * Menghasilkan dan mencetak jadwal menggunakan algoritma yang diberikan.
+     *
+     * @param algorithmName Nama algoritma.
+     * @param generator Fungsi generator jadwal.
+     */
     public static void generateAndPrintSchedule(String algorithmName, ScheduleGenerator.ScheduleGeneratorFunction generator) {
         long startTime = System.nanoTime();
         List<Schedule> schedule = generator.generate();
@@ -36,6 +49,11 @@ public class SchedulePrinter {
         printSchedule(schedule);
     }
 
+    /**
+     * Mencetak jadwal yang diberikan.
+     *
+     * @param schedule Daftar jadwal.
+     */
     private static void printSchedule(List<Schedule> schedule) {
         String[] daysOrder = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         String[] timeOrder = {"08:00", "10:00", "12:00", "14:00", "16:00"};
@@ -68,6 +86,13 @@ public class SchedulePrinter {
         }
     }
 
+    /**
+     * Mencari indeks dari nilai dalam array.
+     *
+     * @param array Array yang akan dicari.
+     * @param value Nilai yang akan dicari.
+     * @return Indeks dari nilai dalam array, atau -1 jika tidak ditemukan.
+     */
     private static int findIndex(String[] array, String value) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].equalsIgnoreCase(value)) {
