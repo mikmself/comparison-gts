@@ -2,12 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Kelas `DataInitializer` bertanggung jawab untuk menginisialisasi data dummy untuk dosen, ruangan, dan mata kuliah.
+ */
 public class DataInitializer {
+    // Daftar dosen
     static List<Lecturer> lecturers = new ArrayList<>();
+
+    // Daftar ruangan
     static List<Room> rooms = new ArrayList<>();
+
+    // Daftar mata kuliah
     static List<Course> courses = new ArrayList<>();
 
+    /**
+     * Metode `createDummyData` digunakan untuk membuat data dummy untuk dosen, ruangan, dan mata kuliah.
+     */
     public static void createDummyData() {
+        // Nama-nama dosen
         String[] lecturerNames = {
                 "Abdul Azis M.Kom.", "Abdul Jahir M.Kom.", "Adam Prayogo Kuncoro M.Kom.",
                 "Ade Nurhopipah S.Si., M.Cs.", "Dr. Ade Tuti Turistiati MIRHRM.",
@@ -20,15 +32,20 @@ public class DataInitializer {
                 "Dr. Arief Adhy Kurniawan S.E., M.Si.", "Asep Suryanto S.Kom.", "Aulia Hamdi M.Kom."
         };
 
+        // Menambahkan dosen ke dalam daftar dosen
         for (int i = 0; i < lecturerNames.length; i++) {
             lecturers.add(new Lecturer(lecturerNames[i], "NIP" + (1000 + i)));
         }
 
+        // Tipe-tipe ruangan
         String[] roomTypes = {"classroom", "lab", "auditorium"};
+
+        // Menambahkan ruangan ke dalam daftar ruangan
         for (int i = 1; i <= 10; i++) {
             rooms.add(new Room("Room " + i, roomTypes[i % roomTypes.length], 30 + new Random().nextInt(20), true, false));
         }
 
+        // Nama-nama mata kuliah
         String[] courseNames = {
                 "Pendidikan Pancasila dan Kewarganegaraan", "Pendidikan Agama Islam", "Sikap Mental Amikom",
                 "Kalkulus Dasar", "Sistem Basis Data", "Arsitektur dan Organisasi Komputer", "Technopreneurship",
@@ -40,6 +57,7 @@ public class DataInitializer {
                 "Teori Graf dan Otomata", "Pemrograman Logik dan Semantik", "Cloud Computing"
         };
 
+        // Kode-kode mata kuliah
         String[] courseCodes = {
                 "NSIFW001", "NSIFW002", "USIFW001", "PSIFW001", "PSIFW003", "PSIFW004", "USIFW002", "USIFW003", "NSIFW008",
                 "FSIFW001", "USIFW004", "PSIFW005", "PSIFW006", "FSIFW002", "FSIFW003", "PSIFW008", "USIFW005", "PSIFW009",
@@ -47,10 +65,12 @@ public class DataInitializer {
                 "PSIFW021", "PSIFW024", "PSIFW022"
         };
 
+        // Jumlah SKS untuk setiap mata kuliah
         int[] creditArray = {
                 3, 3, 1, 2, 4, 3, 2, 2, 3, 3, 3, 2, 3, 3, 3, 3, 2, 4, 3, 3, 2, 3, 3, 3, 2, 3, 3, 3, 2, 4
         };
 
+        // Menambahkan mata kuliah ke dalam daftar mata kuliah
         for (int i = 0; i < courseNames.length; i++) {
             int credits = creditArray[i];
             String type = (credits == 2) ? "theory" : "theory & practice";
