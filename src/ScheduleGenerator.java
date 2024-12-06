@@ -64,7 +64,7 @@ public class ScheduleGenerator {
                 Random random = new Random();
                 do {
                     newJam = jams[random.nextInt(jams.length)];
-                } while (isTimeConflict(offspring, jadwal.hari, newJam));  // Avoid conflict
+                } while (isTimeConflict(offspring, jadwal.hari, newJam));
                 offspring.add(new Jadwal(jadwal.matkul, newJam, jadwal.hari, jadwal.dosen, jadwal.ruang));
             }
         }
@@ -78,7 +78,7 @@ public class ScheduleGenerator {
         String newJam;
         do {
             newJam = jams[random.nextInt(jams.length)];
-        } while (isTimeConflict(schedule, selectedJadwal.hari, newJam, index));  // Avoid conflict
+        } while (isTimeConflict(schedule, selectedJadwal.hari, newJam, index));
 
         schedule.get(index).jam = newJam;
     }
@@ -91,7 +91,7 @@ public class ScheduleGenerator {
         return false;
     }
     private static List<Jadwal> selectBestSchedule(List<List<Jadwal>> population) {
-        return population.get(0);  // Simplified: return the first one
+        return population.get(0);
     }
     public static List<Jadwal> simulatedAnnealing() {
         List<Jadwal> currentSchedule = generateSchedule();
@@ -106,7 +106,7 @@ public class ScheduleGenerator {
             String newJam;
             do {
                 newJam = jams[random.nextInt(jams.length)];
-            } while (isTimeConflict(newSchedule, selectedJadwal.hari, newJam, index)); // Cek konflik
+            } while (isTimeConflict(newSchedule, selectedJadwal.hari, newJam, index));
             newSchedule.get(index).jam = newJam;
             if (acceptanceProbability(currentSchedule, newSchedule, temperature) > Math.random()) {
                 currentSchedule = newSchedule;

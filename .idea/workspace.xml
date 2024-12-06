@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef22198a-8cb9-4447-968e-7ef0716b6973" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Jadwal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Jadwal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/JadwalPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JadwalPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MataKuliahSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MataKuliahSelector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +109,7 @@
       <workItem from="1733386198670" duration="46000" />
       <workItem from="1733386250537" duration="53000" />
       <workItem from="1733417304345" duration="893000" />
-      <workItem from="1733461942118" duration="918000" />
+      <workItem from="1733461942118" duration="1325000" />
     </task>
     <servers />
   </component>
