@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef22198a-8cb9-4447-968e-7ef0716b6973" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CourseSelector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Lecturer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Schedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dosen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Jadwal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JadwalPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SchedulePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MataKuliah.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MataKuliahSelector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Penjadwalan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scheduling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ruang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScheduleGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScheduleGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SchedulePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SchedulePrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Scheduling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scheduling.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Penjadwalan.executor": "Run",
+    "Application.Scheduling.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -73,7 +62,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -129,7 +118,7 @@
       <workItem from="1733417304345" duration="893000" />
       <workItem from="1733461942118" duration="1325000" />
       <workItem from="1733474323438" duration="196000" />
-      <workItem from="1733474525892" duration="961000" />
+      <workItem from="1733474525892" duration="2182000" />
     </task>
     <servers />
   </component>

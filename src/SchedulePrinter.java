@@ -1,6 +1,31 @@
 import java.util.List;
 
 public class SchedulePrinter {
+    public static void printTableOfExecutionTimes() {
+        System.out.println("Execution Times:");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-40s | %-40s | %-40s |%n", "Genetic Algorithm", "Simulated Annealing", "Tabu Search");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+        for (int i = 0; i < 10; i++) {
+            long startTime = System.nanoTime();
+            ScheduleGenerator.geneticAlgorithm();
+            long endTime = System.nanoTime();
+            double duration1 = (endTime - startTime) / 1_000_000.0;
+
+            startTime = System.nanoTime();
+            ScheduleGenerator.simulatedAnnealing();
+            endTime = System.nanoTime();
+            double duration2 = (endTime - startTime) / 1_000_000.0;
+
+            startTime = System.nanoTime();
+            ScheduleGenerator.tabuSearch();
+            endTime = System.nanoTime();
+            double duration3 = (endTime - startTime) / 1_000_000.0;
+
+            System.out.printf("| %-40.3f | %-40.3f | %-40.3f |%n", duration1, duration2, duration3);
+        }
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+    }
     public static void generateAndPrintSchedule(String algorithmName, ScheduleGenerator.ScheduleGeneratorFunction generator) {
         long startTime = System.nanoTime();
         List<Schedule> schedule = generator.generate();
