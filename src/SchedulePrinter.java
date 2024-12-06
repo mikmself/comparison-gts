@@ -5,31 +5,47 @@ import java.util.List;
  */
 public class SchedulePrinter {
     /**
-     * Mencetak tabel waktu eksekusi dari algoritma Genetic Algorithm, Simulated Annealing, dan Tabu Search.
+     * Mencetak tabel waktu eksekusi dari algoritma Genetic Algorithm, Simulated Annealing, dan Tabu Search dan menghitung rata-ratanya.
      */
-    public static void printTableOfExecutionTimes() {
-        System.out.println("Execution Times:");
+    public static void printTableOfExecutionTimes(int times) {
+        double totalDuration1 = 0;
+        double totalDuration2 = 0;
+        double totalDuration3 = 0;
+
+        System.out.println("Execution Times, without print schedule :");
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-40s | %-40s | %-40s |%n", "Genetic Algorithm", "Simulated Annealing", "Tabu Search");
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < times; i++) {
             long startTime = System.nanoTime();
             ScheduleGenerator.geneticAlgorithm();
             long endTime = System.nanoTime();
             double duration1 = (endTime - startTime) / 1_000_000.0;
+            totalDuration1 += duration1;
 
             startTime = System.nanoTime();
             ScheduleGenerator.simulatedAnnealing();
             endTime = System.nanoTime();
             double duration2 = (endTime - startTime) / 1_000_000.0;
+            totalDuration2 += duration2;
 
             startTime = System.nanoTime();
             ScheduleGenerator.tabuSearch();
             endTime = System.nanoTime();
             double duration3 = (endTime - startTime) / 1_000_000.0;
+            totalDuration3 += duration3;
 
             System.out.printf("| %-40.3f | %-40.3f | %-40.3f |%n", duration1, duration2, duration3);
         }
+
+        double averageDuration1 = totalDuration1 / times;
+        double averageDuration2 = totalDuration2 / times;
+        double averageDuration3 = totalDuration3 / times;
+
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-40s | %-40s | %-40s |%n", "Average Execution Time", "Average Execution Time", "Average Execution Time");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-40.3f | %-40.3f | %-40.3f |%n", averageDuration1, averageDuration2, averageDuration3);
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
     }
 

@@ -23,8 +23,9 @@ public class Scheduling {
             SchedulePrinter.generateAndPrintSchedule("Simulated Annealing", ScheduleGenerator::simulatedAnnealing);
             SchedulePrinter.generateAndPrintSchedule("Tabu Search", ScheduleGenerator::tabuSearch);
         }
-
+        System.out.println(" ");
+        System.out.println(" ");
         // Mencetak tabel waktu eksekusi
-        SchedulePrinter.printTableOfExecutionTimes();
+        SchedulePrinter.printTableOfExecutionTimes(times);
     }
 }
