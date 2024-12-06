@@ -57,11 +57,9 @@ public class ScheduleGenerator {
     private static List<Jadwal> crossover(List<Jadwal> parent1, List<Jadwal> parent2) {
         List<Jadwal> offspring = new ArrayList<>(parent1.subList(0, parent1.size() / 2));
         for (Jadwal jadwal : parent2.subList(parent2.size() / 2, parent2.size())) {
-            // Make sure there is no conflict in the offspring
             if (!isTimeConflict(offspring, jadwal.hari, jadwal.jam)) {
                 offspring.add(jadwal);
             } else {
-                // If conflict, try assigning a different time
                 String newJam;
                 Random random = new Random();
                 do {
