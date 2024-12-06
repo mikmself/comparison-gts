@@ -3,10 +3,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Kelas `ScheduleGenerator` menyediakan metode untuk menghasilkan jadwal menggunakan berbagai algoritma.
+ */
 public class ScheduleGenerator {
     static String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     static String[] times = {"08:00", "10:00", "12:00", "14:00", "16:00"};
 
+    /**
+     * Menghasilkan jadwal terbaik secara acak.
+     *
+     * @return Daftar jadwal.
+     */
     public static List<Schedule> generateSchedule() {
         List<Schedule> bestSchedule = new ArrayList<>();
         HashSet<String> used = new HashSet<>();
@@ -30,6 +38,11 @@ public class ScheduleGenerator {
         return bestSchedule;
     }
 
+    /**
+     * Menghasilkan jadwal menggunakan algoritma genetika.
+     *
+     * @return Daftar jadwal.
+     */
     public static List<Schedule> geneticAlgorithm() {
         List<List<Schedule>> population = generateInitialPopulation();
         int generations = 100;
@@ -39,6 +52,11 @@ public class ScheduleGenerator {
         return selectBestSchedule(population);
     }
 
+    /**
+     * Menghasilkan populasi awal untuk algoritma genetika.
+     *
+     * @return Daftar populasi awal.
+     */
     private static List<List<Schedule>> generateInitialPopulation() {
         List<List<Schedule>> initialPopulation = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -47,6 +65,12 @@ public class ScheduleGenerator {
         return initialPopulation;
     }
 
+    /**
+     * Mengembangkan populasi untuk algoritma genetika.
+     *
+     * @param population Populasi saat ini.
+     * @return Populasi baru yang telah dikembangkan.
+     */
     private static List<List<Schedule>> evolvePopulation(List<List<Schedule>> population) {
         List<List<Schedule>> newPopulation = new ArrayList<>();
         for (int i = 0; i < population.size(); i += 2) {
@@ -60,6 +84,13 @@ public class ScheduleGenerator {
         return newPopulation;
     }
 
+    /**
+     * Melakukan crossover antara dua jadwal untuk menghasilkan keturunan.
+     *
+     * @param parent1 Jadwal induk pertama.
+     * @param parent2 Jadwal induk kedua.
+     * @return Jadwal keturunan.
+     */
     private static List<Schedule> crossover(List<Schedule> parent1, List<Schedule> parent2) {
         List<Schedule> offspring = new ArrayList<>(parent1.subList(0, parent1.size() / 2));
         for (Schedule schedule : parent2.subList(parent2.size() / 2, parent2.size())) {
@@ -77,6 +108,11 @@ public class ScheduleGenerator {
         return offspring;
     }
 
+    /**
+     * Melakukan mutasi pada jadwal.
+     *
+     * @param schedule Jadwal yang akan dimutasi.
+     */
     private static void mutate(List<Schedule> schedule) {
         if (schedule.isEmpty()) return;
         Random random = new Random();
@@ -90,6 +126,14 @@ public class ScheduleGenerator {
         schedule.get(index).time = newTime;
     }
 
+    /**
+     * Memeriksa apakah ada konflik waktu dalam jadwal.
+     *
+     * @param schedule Jadwal yang akan diperiksa.
+     * @param day Hari yang akan diperiksa.
+     * @param time Waktu yang akan diperiksa.
+     * @return True jika ada konflik waktu, sebaliknya false.
+     */
     private static boolean isTimeConflict(List<Schedule> schedule, String day, String time) {
         for (Schedule scheduleItem : schedule) {
             if (scheduleItem.day.equals(day) && scheduleItem.time.equals(time)) {
@@ -99,10 +143,21 @@ public class ScheduleGenerator {
         return false;
     }
 
+    /**
+     * Memilih jadwal terbaik dari populasi.
+     *
+     * @param population Populasi jadwal.
+     * @return Jadwal terbaik.
+     */
     private static List<Schedule> selectBestSchedule(List<List<Schedule>> population) {
         return population.get(0);
     }
 
+    /**
+     * Menghasilkan jadwal menggunakan algoritma simulated annealing.
+     *
+     * @return Daftar jadwal.
+     */
     public static List<Schedule> simulatedAnnealing() {
         List<Schedule> currentSchedule = generateSchedule();
         List<Schedule> bestSchedule = new ArrayList<>(currentSchedule);
@@ -131,6 +186,14 @@ public class ScheduleGenerator {
         return bestSchedule;
     }
 
+    /**
+     * Menghitung probabilitas penerimaan untuk algoritma simulated annealing.
+     *
+     * @param current Jadwal saat ini.
+     * @param newSchedule Jadwal baru.
+     * @param temperature Suhu saat ini.
+     * @return Probabilitas penerimaan.
+     */
     private static double acceptanceProbability(List<Schedule> current, List<Schedule> newSchedule, double temperature) {
         int currentFitness = calculateFitness(current);
         int newFitness = calculateFitness(newSchedule);
@@ -140,6 +203,15 @@ public class ScheduleGenerator {
         return Math.exp((newFitness - currentFitness) / temperature);
     }
 
+    /**
+     * Memeriksa apakah ada konflik waktu dalam jadwal, mengabaikan indeks tertentu.
+     *
+     * @param schedule Jadwal yang akan diperiksa.
+     * @param day Hari yang akan diperiksa.
+     * @param time Waktu yang akan diperiksa.
+     * @param excludeIndex Indeks yang akan diabaikan.
+     * @return True jika ada konflik waktu, sebaliknya false.
+     */
     private static boolean isTimeConflict(List<Schedule> schedule, String day, String time, int excludeIndex) {
         for (int i = 0; i < schedule.size(); i++) {
             if (i == excludeIndex) continue;
@@ -151,6 +223,11 @@ public class ScheduleGenerator {
         return false;
     }
 
+    /**
+     * Menghasilkan jadwal menggunakan algoritma tabu search.
+     *
+     * @return Daftar jadwal.
+     */
     public static List<Schedule> tabuSearch() {
         List<Schedule> currentSchedule = generateSchedule();
         List<Schedule> bestSchedule = new ArrayList<>(currentSchedule);
@@ -174,6 +251,12 @@ public class ScheduleGenerator {
         return bestSchedule;
     }
 
+    /**
+     * Menghasilkan tetangga dari jadwal saat ini untuk algoritma tabu search.
+     *
+     * @param schedule Jadwal saat ini.
+     * @return Jadwal tetangga.
+     */
     private static List<Schedule> generateNeighbor(List<Schedule> schedule) {
         Random random = new Random();
         List<Schedule> neighbor = new ArrayList<>(schedule);
@@ -187,10 +270,19 @@ public class ScheduleGenerator {
         return neighbor;
     }
 
+    /**
+     * Menghitung fitness dari jadwal.
+     *
+     * @param schedule Jadwal yang akan dihitung fitness-nya.
+     * @return Nilai fitness.
+     */
     private static int calculateFitness(List<Schedule> schedule) {
         return schedule.size();
     }
 
+    /**
+     * Antarmuka fungsional untuk fungsi generator jadwal.
+     */
     @FunctionalInterface
     public interface ScheduleGeneratorFunction {
         List<Schedule> generate();
