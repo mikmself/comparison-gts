@@ -12,7 +12,6 @@ class Jadwal {
         this.dosen = dosen;
         this.ruang = ruang;
     }
-
     @Override
     public String toString() {
         return "Jadwal{" +

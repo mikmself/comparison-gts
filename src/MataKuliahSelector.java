@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class MataKuliahSelector {
     static List<MataKuliah> selectedMatkul = new ArrayList<>();
-
     public static void selectCourses() {
         Scanner scanner = new Scanner(System.in);
         int totalSKS = 0;

@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 public class DataInitializer {
     static List<Dosen> dosens = new ArrayList<>();
     static List<Ruang> ruangs = new ArrayList<>();
     static List<MataKuliah> matkuls = new ArrayList<>();
-
     public static void createDummyData() {
         String[] dosenNames = {
                 "Abdul Azis M.Kom.", "Abdul Jahir M.Kom.", "Adam Prayogo Kuncoro M.Kom.",
@@ -19,16 +17,13 @@ public class DataInitializer {
                 "Antonius Ary Setyawan", "Anugerah Bagus Wijaya M.Kom.", "Argiyan Dwi Pritama S.Kom., M.MSI.",
                 "Dr. Arief Adhy Kurniawan S.E., M.Si.", "Asep Suryanto S.Kom.", "Aulia Hamdi M.Kom."
         };
-
         for (int i = 0; i < dosenNames.length; i++) {
             dosens.add(new Dosen(dosenNames[i], "NIP" + (1000 + i)));
         }
-
         String[] jenisRuang = {"kelas", "lab", "auditorium"};
         for (int i = 1; i <= 10; i++) {
             ruangs.add(new Ruang("Ruang " + i, jenisRuang[i % jenisRuang.length], 30 + new Random().nextInt(20), true, false));
         }
-
         String[] matkulNames = {
                 "Pendidikan Pancasila dan Kewarganegaraan", "Pendidikan Agama Islam", "Sikap Mental Amikom",
                 "Kalkulus Dasar", "Sistem Basis Data", "Arsitektur dan Organisasi Komputer", "Technopreneurship",
@@ -39,14 +34,12 @@ public class DataInitializer {
                 "Pembelajaran Mesin", "Logika Digital dan Sistem Digital", "Bahasa Inggris Lanjut", "Mikroprosessor",
                 "Teori Graf dan Otomata", "Pemrograman Logik dan Semantik", "Cloud Computing"
         };
-
         String[] matkulCodes = {
                 "NSIFW001", "NSIFW002", "USIFW001", "PSIFW001", "PSIFW003", "PSIFW004", "USIFW002", "USIFW003", "NSIFW008",
                 "FSIFW001", "USIFW004", "PSIFW005", "PSIFW006", "FSIFW002", "FSIFW003", "PSIFW008", "USIFW005", "PSIFW009",
                 "FSIFW004", "PSIFW010", "PSIFW002", "PSIFW012", "PSIFW013", "PSIFW031", "PSIFW014", "FSIFW005", "PSIFW020",
                 "PSIFW021", "PSIFW024", "PSIFW022"
         };
-
         int[] sksArray = {
                 3, 3, 1, 2, 4, 3, 2, 2, 3, 3, 3, 2, 3, 3, 3, 3, 2, 4, 3, 3, 2, 3, 3, 3, 2, 3, 3, 3, 2, 4
         };
